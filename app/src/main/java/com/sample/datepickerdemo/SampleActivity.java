@@ -1,5 +1,6 @@
 package com.sample.datepickerdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -11,11 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SampleActivity extends AppCompatActivity implements OnCheckInOutDateListener {
 
@@ -88,6 +91,12 @@ public class SampleActivity extends AppCompatActivity implements OnCheckInOutDat
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        viewpager.setCurrentItem(0);
+    }
+
+    @Override
     public void onCheckInDateChanged(Date checkInDate) {
         this.checkInDate = checkInDate;
         checkInDateFragment.setCheckInDate(checkInDate);
@@ -112,16 +121,31 @@ public class SampleActivity extends AppCompatActivity implements OnCheckInOutDat
 
     }
 
+    int days;
     private void updateNightStay() {
         if (checkInDate != null && checkOutDate != null) {
-            int days = checkOutDateFragment.getSelectedDays()-1;
+            days = checkOutDateFragment.getSelectedDays() - 1;
             if (days < 1) {
                 tvDays.setText("Please pick the days");
             } else if (days == 1) {
-                tvDays.setText(String.format("Total stay: %d night",days));
+                tvDays.setText(String.format("Total stay: %d night", days));
             } else {
-                tvDays.setText(String.format("Total stay: %d nights",days));
+                tvDays.setText(String.format("Total stay: %d nights", days));
             }
         }
+    }
+
+    @OnClick(R.id.bOk)
+    public void onViewClicked() {
+        if(checkInDate!=null && checkOutDate!=null) {
+            Intent intent = new Intent(this, FinalScreen.class);
+            intent.putExtra(Constants.CHECKIN, checkInDate);
+            intent.putExtra(Constants.CHECKOUT,checkOutDate);
+            intent.putExtra(Constants.TOTAL_STAY,days);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this,"Please pick checkin and checkout dates first!",2000).show();
+        }
+
     }
 }

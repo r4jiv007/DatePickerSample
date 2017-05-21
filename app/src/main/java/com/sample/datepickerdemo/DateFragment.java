@@ -145,10 +145,14 @@ public class DateFragment extends Fragment {
             dates.add(checkOutDate);
             if (dateType == DateType.CHECKIN) {
                 calendarView.init(new Date(), nextYear.getTime()) 
-                        .inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates); 
+                        .inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates);
+
+                calendarView.scrollToDate(checkInDate);
             } else {
                 calendarView.init(checkInDate, nextYear.getTime()) 
-                        .inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates); 
+                        .inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates);
+
+                calendarView.scrollToDate(checkOutDate);
             }
         }
     }
