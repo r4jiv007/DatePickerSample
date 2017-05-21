@@ -8,6 +8,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.Date;
 
@@ -30,6 +33,12 @@ public class SampleActivity extends AppCompatActivity implements OnCheckInOutDat
     CoordinatorLayout mainContent;
     DateFragment checkInDateFragment;
     DateFragment checkOutDateFragment;
+    @Bind(R.id.tvDays)
+    TextView tvDays;
+    @Bind(R.id.bOk)
+    Button bOk;
+    @Bind(R.id.llBottomBar)
+    LinearLayout llBottomBar;
     private Date checkInDate;
     private Date checkOutDate;
 
@@ -84,6 +93,7 @@ public class SampleActivity extends AppCompatActivity implements OnCheckInOutDat
         checkInDateFragment.setCheckInDate(checkInDate);
         checkOutDateFragment.setCheckInDate(checkInDate);
         viewpager.setCurrentItem(1);
+        updateNightStay();
     }
 
     @Override
@@ -94,6 +104,7 @@ public class SampleActivity extends AppCompatActivity implements OnCheckInOutDat
         if (checkInDate == null) {
             viewpager.setCurrentItem(0);
         }
+        updateNightStay();
     }
 
     @Override
@@ -101,5 +112,16 @@ public class SampleActivity extends AppCompatActivity implements OnCheckInOutDat
 
     }
 
-
+    private void updateNightStay() {
+        if (checkInDate != null && checkOutDate != null) {
+            int days = checkOutDateFragment.getSelectedDays()-1;
+            if (days < 1) {
+                tvDays.setText("Please pick the days");
+            } else if (days == 1) {
+                tvDays.setText(String.format("Total stay: %d night",days));
+            } else {
+                tvDays.setText(String.format("Total stay: %d nights",days));
+            }
+        }
+    }
 }

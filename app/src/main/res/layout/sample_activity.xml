@@ -28,7 +28,7 @@
             app:tabIndicatorColor="@android:color/white"
             app:tabMode="fixed"
             app:tabSelectedTextColor="?attr/colorAccent"
-            app:tabTextColor="@android:color/black" />
+            app:tabTextColor="@color/tab_unselected" />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
@@ -40,8 +40,9 @@
     <LinearLayout
         android:id="@+id/llBottomBar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
+        android:background="@drawable/bottom_bar_border"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -49,16 +50,21 @@
             android:id="@+id/tvDays"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3" />
+            android:layout_weight="2.5"
+            android:background="@drawable/bottom_bar_border"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/bOk"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
+            android:layout_weight="1.5"
+            android:background="@color/colorPrimary"
             android:text="@string/ok"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
     </LinearLayout>
 
 

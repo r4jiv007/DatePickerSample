@@ -166,4 +166,12 @@ public class DateFragment extends Fragment {
         CHECKIN,
         CHECKOUT
     }
+
+    public int getSelectedDays(){
+        if(checkInDate!=null && checkOutDate!=null){
+          return   calendarView.getSelectedDates().size();
+        }else {
+            return 0;
+        }
+    }
 }

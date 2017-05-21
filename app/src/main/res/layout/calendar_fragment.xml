@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.squareup.timessquare.CalendarPickerView
@@ -12,6 +14,9 @@
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
         android:scrollbarStyle="outsideOverlay"
+        app:tsquare_dayBackground="@drawable/custom_calendar_bg_selector"
+        app:tsquare_dayTextColor="@color/custom_calendar_text_selector"
+        app:tsquare_dividerColor="@color/transparent"
         android:clipToPadding="false"
         android:background="#FFFFFF"
         />

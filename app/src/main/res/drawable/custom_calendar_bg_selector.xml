@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/bg_selected" android:state_selected="true" />
+    <item android:drawable="@drawable/bg_today" app:tsquare_state_today="true" />
+    <item android:drawable="@drawable/bg_end" app:tsquare_state_range_first="true" />
+    <item android:drawable="@drawable/bg_middle" app:tsquare_state_range_middle="true" />
+    <item android:drawable="@drawable/bg_end" app:tsquare_state_range_last="true" />
+
+</selector>

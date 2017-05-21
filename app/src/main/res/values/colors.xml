@@ -3,4 +3,17 @@
     <color name="colorPrimary">#71749f</color>
     <color name="colorPrimaryDark">#5e618c</color>
     <color name="colorAccent">#FFFFFF</color>
+    <color name="tab_unselected">#9b9bbf</color>
+    <color name="middle_color">#d1d3e0</color>
+
+
+    <color name="custom_header_text">#85B100</color>
+    <color name="custom_selected">#A8D324</color>
+    <color name="custom_background">#F0F8DB</color>
+    <color name="custom_background_today">@android:color/black</color>
+    <color name="custom_background_disabled">#F0F8DB</color>
+    <color name="custom_text_selected">#FFFFFFFF</color>
+    <color name="custom_text_today">@android:color/black</color>
+    <color name="custom_text_inactive">#7f778088</color>
+    <color name="transparent">#00000000</color>
 </resources>
