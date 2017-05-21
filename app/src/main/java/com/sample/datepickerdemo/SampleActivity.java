@@ -8,7 +8,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import java.util.Date;
 
@@ -89,13 +88,18 @@ public class SampleActivity extends AppCompatActivity implements OnCheckInOutDat
 
     @Override
     public void onCheckOutDateChanged(Date checkOutDate) {
-        if (checkInDate != null && checkOutDate != null && 0 == checkInDate.compareTo(checkOutDate)) {
-            Toast.makeText(this, "please select future date", 2000).show();
-
-        } else {
-            this.checkOutDate = checkOutDate;
-            checkInDateFragment.setCheckOutDate(checkOutDate);
-            checkOutDateFragment.setCheckOutDate(checkOutDate);
+        this.checkOutDate = checkOutDate;
+        checkInDateFragment.setCheckOutDate(checkOutDate);
+        checkOutDateFragment.setCheckOutDate(checkOutDate);
+        if (checkInDate == null) {
+            viewpager.setCurrentItem(0);
         }
     }
+
+    @Override
+    public void onCheckInDateNotSelected() {
+
+    }
+
+
 }

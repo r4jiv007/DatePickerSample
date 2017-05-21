@@ -6,4 +6,5 @@ public interface OnCheckInOutDateListener {
 
     void onCheckInDateChanged(Date checkInDate);
     void onCheckOutDateChanged(Date checkOutDate);
+    void onCheckInDateNotSelected();
 }

@@ -47,6 +47,7 @@ public class DateFragment extends Fragment {
 
     public void setCheckInDate(Date checkInDate) {
         this.checkInDate = checkInDate;
+        clearCheckOutDate();
         initCalendar();
     }
 
@@ -79,11 +80,10 @@ public class DateFragment extends Fragment {
         calendarView.setOnInvalidDateSelectedListener(new CalendarPickerView.OnInvalidDateSelectedListener() {
             @Override
             public void onInvalidDateSelected(Date date) {
+                Toast.makeText(getContext(), "please pick future date", 2000).show();
 
             }
         });
-
-
 
 
         calendarView.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
@@ -93,12 +93,11 @@ public class DateFragment extends Fragment {
                     checkInOutDateListener.onCheckInDateChanged(date);
                 } else {
                     if (checkInDate != null && date != null && 0 == checkInDate.compareTo(date)) {
-                        Toast.makeText(getContext(), "please select future date", 2000).show();
+                        Toast.makeText(getContext(), "please pick future date", 2000).show();
                         initCalendar();
-                        return ;
+                        return;
                     }
-
-                        checkInOutDateListener.onCheckOutDateChanged(date);
+                    checkInOutDateListener.onCheckOutDateChanged(date);
                 }
             }
 
@@ -124,39 +123,43 @@ public class DateFragment extends Fragment {
         lastYear.add(Calendar.YEAR, -1);
 
 
-        if(checkInDate==null && checkOutDate==null) {
-            calendarView.init(new Date(), nextYear.getTime()) //
-                    .inMode(CalendarPickerView.SelectionMode.RANGE); //
-        }else if(checkInDate!=null && checkOutDate==null){
-
-        }else if(checkInDate !=null && checkOutDate!=null){
-
-        }
-
-        if (checkInDate != null) {
+        if (checkInDate == null && checkOutDate == null) {
+            calendarView.init(new Date(), nextYear.getTime()) 
+                    .inMode(CalendarPickerView.SelectionMode.RANGE); 
+        } else if (checkInDate != null && checkOutDate == null) {
             if (dateType == DateType.CHECKIN) {
-                calendarView.init(new Date(), nextYear.getTime()) //
-                        .inMode(CalendarPickerView.SelectionMode.RANGE); //
+                calendarView.init(new Date(), nextYear.getTime()) 
+                        .inMode(CalendarPickerView.SelectionMode.RANGE); 
             } else {
-                calendarView.init(checkInDate, nextYear.getTime()) //
-                        .inMode(CalendarPickerView.SelectionMode.RANGE); //
+                calendarView.init(checkInDate, nextYear.getTime()) 
+                        .inMode(CalendarPickerView.SelectionMode.RANGE); 
             }
             calendarView.selectDate(checkInDate);
-        }
-
-        if (checkInDate != null && checkOutDate != null) {
+        } else if (checkOutDate != null && checkInDate == null) {
+            calendarView.init(new Date(), nextYear.getTime()) 
+                    .inMode(CalendarPickerView.SelectionMode.RANGE); 
+            calendarView.selectDate(checkOutDate);
+        } else if (checkInDate != null && checkOutDate != null) {
             ArrayList<Date> dates = new ArrayList<Date>();
             dates.add(checkInDate);
             dates.add(checkOutDate);
             if (dateType == DateType.CHECKIN) {
-                calendarView.init(new Date(), nextYear.getTime()) //
-                        .inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates); //
+                calendarView.init(new Date(), nextYear.getTime()) 
+                        .inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates); 
             } else {
-                calendarView.init(checkInDate, nextYear.getTime()) //
-                        .inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates); //
+                calendarView.init(checkInDate, nextYear.getTime()) 
+                        .inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates); 
             }
-
         }
+    }
+
+    public void clearCheckinDate() {
+        checkInDate = null;
+    }
+
+    public void clearCheckOutDate() {
+        if (checkInDate != null && checkOutDate != null && checkInDate.compareTo(checkOutDate) > 0)
+            checkOutDate = null;
     }
 
     public enum DateType {
